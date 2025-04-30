@@ -1,0 +1,15 @@
+
+[
+    {
+        "name": "John Doe",
+        "age": 32,
+        "city": "New York",
+        "isAdmin": true
+    },
+    {
+        "name": "Jane Doe",
+        "age": 24,
+        "city": "London",
+        "isAdmin": false
+    }
+]
