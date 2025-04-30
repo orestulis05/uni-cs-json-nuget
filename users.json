@@ -1,15 +1,15 @@
 
 [
     {
-        "name": "John Doe",
-        "age": 32,
-        "city": "New York",
-        "isAdmin": true
+        "Name": "John Doe",
+        "Age": 32,
+        "City": "New York",
+        "IsAdmin": true
     },
     {
-        "name": "Jane Doe",
-        "age": 24,
-        "city": "London",
-        "isAdmin": false
+        "Name": "Jane Doe",
+        "Age": 24,
+        "City": "London",
+        "IsAdmin": false
     }
 ]
