@@ -1,30 +1,56 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
+using System.Runtime.CompilerServices;
 
-// Reading the contents from users.json file
-
-// IMPORTANT: insert an absolute filepath to the json file! 
+// Reading the contents from users.json file.
 string filePath = "users.json";
 string jsonResponse = File.ReadAllText(filePath);
 
-// Getting the data from file's contents 
-List<User> userData = JsonConvert.DeserializeObject<List<User>>(jsonResponse);
+// Create roled users from the data of users.json file.
+List<User> roledUsers = CreateRoledUsers(jsonResponse);
 
-if (userData == null)
-    return;
+// Print out the data of each user.
+PrintUsersData(roledUsers);
 
-PrintUsersData(userData);
+List<User> CreateRoledUsers(string jsonData)
+{
+    List<User> results = new List<User>();
+
+    List<User> userData = JsonConvert.DeserializeObject<List<User>>(jsonResponse);
+    if (userData == null)
+        return null;
+
+    foreach (var user in userData)
+    {
+        User roledUser;
+
+        if (user.IsAdmin)
+        {
+            roledUser = new AdminUser(user.Name, user.Age, user.City);
+        } 
+        else
+        {
+            roledUser = new RegularUser(user.Name, user.Age, user.City);
+        }
+
+        results.Add(roledUser);
+    }
+
+    return results;
+}
 
 void PrintUsersData(List<User> data)
 {
-    foreach (var item in userData)
+    foreach (var item in data)
     {
         string output = String.Format(
-            "Name: {0}, Age: {1}, City: {2}, Admin: {3}",
+            "Name: {0}, Age: {1}, City: {2}, Admin: {3}, Class: {4}",
             item.Name,
             item.Age,
             item.City,
-            item.IsAdmin);
+            item.IsAdmin,
+            item.GetType().Name
+        );
 
         Console.WriteLine(output);
     }
@@ -36,5 +62,37 @@ public class User
     public int Age { get; set; }
     public string City { get; set; }
     public bool IsAdmin { get; set; }
+
 }
 
+public class AdminUser : User
+{
+    public AdminUser(string name, int age, string city)
+    {
+        this.Name = name;
+        this.Age = age;
+        this.City = city;
+        this.IsAdmin = true;
+    }
+
+    public void DoAdminThings()
+    {
+        Console.WriteLine("Doing some admin things.");
+    }
+}
+
+public class RegularUser : User
+{
+    public RegularUser(string name, int age, string city)
+    {
+        this.Name = name;
+        this.Age = age;
+        this.City = city;
+        this.IsAdmin = false;
+    }
+
+    public void DoRegularUserThings()
+    {
+        Console.WriteLine("Doing some regular user things.");
+    }
+}

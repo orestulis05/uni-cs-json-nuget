@@ -1,4 +1,3 @@
-
 [
     {
         "Name": "John Doe",
@@ -11,5 +10,17 @@
         "Age": 24,
         "City": "London",
         "IsAdmin": false
+    },
+    {
+        "Name": "Jake Rake",
+        "Age": 30,
+        "City": "Dublin",
+        "IsAdmin": false
+    },
+    {
+        "Name": "Hannah Montanah",
+        "Age": 19,
+        "City": "Reikjavik",
+        "IsAdmin": true
     }
 ]
